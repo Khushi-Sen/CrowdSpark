@@ -53,6 +53,20 @@ router.get('/user/:userId', async (req, res) => {
 });
 
 
+router.get('/:id', async (req, res) => {
+  try {
+    const campaign = await Campaign.findById(req.params.id).populate('creator');
+    if (!campaign) {
+      return res.status(404).json({ message: 'Campaign not found' });
+    }
+    res.json(campaign);
+  } catch (err) {
+    console.error('Fetch campaign by ID error:', err);
+    res.status(500).json({ message: 'Failed to fetch campaign' });
+  }
+});
+
+
 router.delete('/:id', async (req, res) => {
   try {
     const deleted = await Campaign.findByIdAndDelete(req.params.id);
