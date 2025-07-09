@@ -1,18 +1,20 @@
-
 const mongoose = require('mongoose');
 
-const campaignSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  description: { type: String },
-  goal: { type: Number, required: true },
-  category: { type: String, required: true}, 
-  endDate:{type: Date, required: true},
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
- 
-},);
+const CampaignSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  goal: Number,
+  category: String,
+  endDate: Date,
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  status: {
+    type: String,
+    enum: ['pending', 'approved', 'rejected'],
+    default: 'pending',
+  },
+}, { timestamps: true });
 
-
-module.exports = mongoose.model('Campaign', campaignSchema);
+module.exports = mongoose.model('Campaign', CampaignSchema);

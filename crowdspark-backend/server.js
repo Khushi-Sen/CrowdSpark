@@ -1,4 +1,3 @@
-
 require('dotenv').config();
 
 const express  = require('express');
@@ -9,21 +8,25 @@ const authRoutes     = require('./routes/auth');
 const campaignRoutes = require('./routes/campaigns');
 const commentRoutes  = require('./routes/comments');
 const updateRoutes   = require('./routes/updates');
-const paymentRoutes  = require('./routes/payment');   
-
+const paymentRoutes  = require('./routes/payment');
+const adminRoutes = require('./routes/admin');
 
 const app = express();
 
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173', 
+  credentials: true
+}));
+
 app.use(express.json());
 
-
+app.use('/api/admin', adminRoutes);
 app.use('/api/auth',      authRoutes);
 app.use('/api/campaigns', campaignRoutes);
 app.use('/api/comments',  commentRoutes);
 app.use('/api/updates',   updateRoutes);
-app.use('/api/payment',   paymentRoutes);   
+app.use('/api/payment',   paymentRoutes);
 
 const MONGO_URI = process.env.MONGO_URI;
 const PORT      = process.env.PORT || 5000;
@@ -33,8 +36,8 @@ if (!MONGO_URI) {
   process.exit(1);
 }
 
-mongoose
-  .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+
+mongoose.connect(MONGO_URI)
   .then(() => {
     console.log('✅ Connected to MongoDB');
     app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

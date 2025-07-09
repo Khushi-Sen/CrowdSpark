@@ -11,27 +11,35 @@ export default function CreateCampaign() {
   const [endDate,     setEndDate]     = useState('');  
   const navigate = useNavigate();
 
-  const handleCreate = async (e) => {
-    e.preventDefault();
+const handleCreate = async (e) => {
+  e.preventDefault();
 
-    const campaign = {
-      title,
-      goal: Number(goal),
-      description,
-      category,
-      endDate,
-    };
+  const storedUser = JSON.parse(localStorage.getItem("user"));
 
-    try {
-      const res = await axios.post('http://localhost:5000/api/campaigns', campaign);
-      alert(res.data.message || "Campaign created successfully");
-      console.log("Saved campaign:", res.data.campaign);
-      navigate('/dashboard');
-    } catch (err) {
-      console.error("Create Campaign Error:", err);
-      alert("Failed to create campaign");
-    }
+  if (!storedUser?.id) {
+    alert("You must be logged in to create a campaign.");
+    return;
+  }
+
+  const campaign = {
+    title,
+    goal: Number(goal),
+    description,
+    category,
+    endDate,
+    userId: storedUser.id, 
   };
+
+  try {
+    const res = await axios.post('http://localhost:5000/api/campaigns', campaign);
+    alert(res.data.message || "Campaign created successfully");
+    console.log("Saved campaign:", res.data.campaign);
+    navigate('/dashboard');
+  } catch (err) {
+    console.error("Create Campaign Error:", err);
+    alert("Failed to create campaign");
+  }
+};
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-primary px-4 py-12">

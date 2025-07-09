@@ -17,7 +17,7 @@ export default function Landing() {
           <Link to="/about" className="hover:underline">
             About Us
           </Link>
-          <Link to="/explore">
+          <Link to="/login">
             <button className="bg-white text-black px-4 py-2 rounded hover:scale-105 transition">
               Get Started
             </button>
@@ -35,7 +35,7 @@ export default function Landing() {
           A sleek and modern MERN stack crowdfunding platform
         </p>
         <Link
-          to="/explore"
+          to="/login"
           className="bg-[#FFF1D5] text-blue-900 font-semibold px-8 py-3 rounded-full shadow-lg hover:scale-105 transition"
         >
           Get Started

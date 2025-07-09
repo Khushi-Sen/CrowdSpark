@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Update = require('../models/update');
+const Update = require('../models/Update');
 
 router.post('/:campaignId', async (req, res) => {
   const { campaignId } = req.params;

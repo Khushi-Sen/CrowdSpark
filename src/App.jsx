@@ -1,6 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Landing from "./pages/Landing";
-import Home from "./pages/Home";
 import Explore from "./pages/Explore";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -9,12 +8,15 @@ import CreateCampaign from "./pages/CreateCampaign";
 import CampaignDetail from "./pages/CampaignDetail";
 import Navbar from "./components/Navbar";
 import PaymentPage from './pages/paymentpage';
+import AdminDashboard from './pages/AdminDashboard';
+import NotAuthorized from './pages/NotAuthorized'
 
 function App() {
+  const location = useLocation();
+
   return (
     <div className="bg-primary min-h-screen text-gray-900">
-
-      {window.location.pathname !== "/" && <Navbar />}
+      {!['/', '/login', '/register'].includes(location.pathname) && <Navbar />}
 
       <Routes>
         <Route path="/" element={<Landing />} />
@@ -24,10 +26,10 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create" element={<CreateCampaign />} />
         <Route path="/campaign/:id" element={<CampaignDetail />} />
-        <Route path="/landing" element={<Landing />} />
-        <Route path="/campaign/:id" element={<CampaignDetail />} />
         <Route path="/payment" element={<PaymentPage />} />
- 
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/not-authorized" element={<NotAuthorized />} />
+
       </Routes>
     </div>
   );
