@@ -88,6 +88,7 @@ export default function CampaignDetail() {
       <h2 className="text-3xl font-bold text-blue-900 mb-4">{campaign.title}</h2>
       <p className="text-gray-600 mb-2">{campaign.description}</p>
       <p className="text-gray-800 mb-4">Goal: ₹{campaign.goal}</p>
+      <p>Raised: ₹{campaign.raisedAmount}</p>
 
       <div className="mt-4 mb-6 flex items-center gap-4">
         <span className="font-semibold text-gray-700">Share this campaign:</span>

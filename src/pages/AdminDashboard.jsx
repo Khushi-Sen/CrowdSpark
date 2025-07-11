@@ -1,5 +1,4 @@
 
-// export default AdminDashboard;
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -121,6 +120,7 @@ const AdminDashboard = () => {
                 <th className="px-4 py-2 border">Title</th>
                 <th className="px-4 py-2 border">Category</th>
                 <th className="px-4 py-2 border">Goal ₹</th>
+                <th className="px-4 py-2 border">Raised ₹</th>
                 <th className="px-4 py-2 border">Creator</th>
                 <th className="px-4 py-2 border">Status</th>
                 <th className="px-4 py-2 border">Action</th>
@@ -129,10 +129,10 @@ const AdminDashboard = () => {
             <tbody>
               {campaigns.map((camp) => (
                 <tr key={camp._id} className="hover:bg-blue-50 transition">
-                
                   <td className="px-4 py-2 border font-semibold">{camp.title || "Untitled"}</td>
                   <td className="px-4 py-2 border capitalize">{camp.category || "None"}</td>
                   <td className="px-4 py-2 border text-green-600 font-semibold">₹{camp.goal}</td>
+                  <td className="px-4 py-2 border text-green-700 font-semibold">₹{camp.raisedAmount || 0}</td>
                   <td className="px-4 py-2 border">
                     {camp.creator
                       ? typeof camp.creator === 'object'
@@ -142,19 +142,18 @@ const AdminDashboard = () => {
                   </td>
                   <td className="px-4 py-2 border">
                     <span
-                    className={`px-2 py-1 rounded text-white text-xs capitalize ${
-                      camp.status?.toLowerCase() === "approved"
-                        ? "bg-green-600"
-                        : camp.status?.toLowerCase() === "rejected"
-                        ? "bg-red-600"
-                        : "bg-yellow-500"
-                    }`}
-                  >
-                    {camp.status || "Unknown"}
-                  </span>
-
+                      className={`px-2 py-1 rounded text-white text-xs capitalize ${
+                        camp.status?.toLowerCase() === "approved"
+                          ? "bg-green-600"
+                          : camp.status?.toLowerCase() === "rejected"
+                          ? "bg-red-600"
+                          : "bg-yellow-500"
+                      }`}
+                    >
+                      {camp.status || "Unknown"}
+                    </span>
                   </td>
-                <td className="px-4 py-2 border">
+                  <td className="px-4 py-2 border">
                     {camp.status?.toLowerCase() === "pending" ? (
                       <div className="space-x-2">
                         <button
@@ -169,6 +168,13 @@ const AdminDashboard = () => {
                         >
                           Reject
                         </button>
+                          <button
+                        onClick={() => navigate(`/campaign/${camp._id}`)}
+                        className="text-blue-600 hover:underline"
+                      >
+                        View
+                      </button>
+                        
                       </div>
                     ) : (
                       <span className="italic text-gray-400">No Action</span>

@@ -15,6 +15,11 @@ const CampaignSchema = new mongoose.Schema({
     enum: ['pending', 'approved', 'rejected'],
     default: 'pending',
   },
+  raisedAmount: {
+  type: Number,
+  default: 0
+} 
+
 }, { timestamps: true });
 
 module.exports = mongoose.model('Campaign', CampaignSchema);

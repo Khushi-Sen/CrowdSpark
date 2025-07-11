@@ -21,13 +21,23 @@ exports.createCampaign = async (req, res) => {
 
 exports.getAllCampaigns = async (req, res) => {
   try {
-    const campaigns = await Campaign.find().sort({ createdAt: -1 });
+    const now = new Date();
+    await Campaign.deleteMany({
+  $or: [
+    { endDate: { $lt: new Date() } },
+    { status: "rejected" }
+  ]
+});
+
+    const campaigns = await Campaign.find({ endDate: { $gte: now } }).sort({ createdAt: -1 });
+
     res.json(campaigns);
   } catch (err) {
     console.error('Fetch Campaigns Error:', err);
     res.status(500).json({ message: 'Failed to fetch campaigns' });
   }
 };
+
 
 exports.getUserCampaigns = async (req, res) => {
   try {

@@ -81,4 +81,28 @@ router.put('/campaigns/:id/status', async (req, res) => {
   }
 });
 
+// PUT /api/admin/campaigns/:id/status
+router.put("/campaigns/:id/status", async (req, res) => {
+  const { status } = req.body;
+  try {
+    if (status === "rejected") {
+      await Campaign.findByIdAndDelete(req.params.id);
+      return res.json({ message: "Campaign rejected and deleted." });
+    } else {
+      const updated = await Campaign.findByIdAndUpdate(
+        req.params.id,
+        { status },
+        { new: true }
+      );
+      res.json(updated);
+    }
+  } catch (err) {
+    console.error("Error updating status:", err);
+    res.status(500).json({ message: "Failed to update status" });
+  }
+});
+
+
+
+
 module.exports = router;

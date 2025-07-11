@@ -8,8 +8,9 @@ const authRoutes     = require('./routes/auth');
 const campaignRoutes = require('./routes/campaigns');
 const commentRoutes  = require('./routes/comments');
 const updateRoutes   = require('./routes/updates');
-const paymentRoutes  = require('./routes/payment');
+
 const adminRoutes = require('./routes/admin');
+const paymentRoutes = require('./routes/payment');
 
 const app = express();
 
@@ -26,7 +27,7 @@ app.use('/api/auth',      authRoutes);
 app.use('/api/campaigns', campaignRoutes);
 app.use('/api/comments',  commentRoutes);
 app.use('/api/updates',   updateRoutes);
-app.use('/api/payment',   paymentRoutes);
+app.use('/api/payment', paymentRoutes);
 
 const MONGO_URI = process.env.MONGO_URI;
 const PORT      = process.env.PORT || 5000;

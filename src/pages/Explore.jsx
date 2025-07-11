@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 import CampaignCard from "../components/CampaignCard";
@@ -15,7 +14,6 @@ export default function Explore() {
       .then(res => setCampaigns(res.data))
       .catch(err => console.error("Error loading campaigns:", err));
   }, []);
-
 
   const handleDelete = async (id) => {
     const confirm = window.confirm("Are you sure you want to delete this campaign?");
@@ -38,13 +36,13 @@ export default function Explore() {
     )
     .sort((a, b) => {
       if (sort === "Goal") return (b.goal || 0) - (a.goal || 0);
-      if (sort === "Funded") return (b.funded || 0) - (a.funded || 0);
+      if (sort === "Funded") return (b.raisedAmount || 0) - (a.raisedAmount || 0);
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
 
   const topCampaigns = [...campaigns]
-    .filter((c) => c?.funded && c?.goal)
-    .sort((a, b) => (b.funded || 0) - (a.funded || 0))
+    .filter((c) => c?.raisedAmount && c?.goal)
+    .sort((a, b) => (b.raisedAmount || 0) - (a.raisedAmount || 0))
     .slice(0, 3);
 
   const endingSoon = [...campaigns]
@@ -59,7 +57,6 @@ export default function Explore() {
     <div className="p-6 bg-primary min-h-screen">
       <h2 className="text-3xl font-bold text-center text-blue-900 mb-9">🌟 Explore Campaigns</h2>
 
-      {/* 🔍 Filters */}
       <div className="flex flex-col md:flex-row items-center justify-between mb-9 gap-4">
         <input
           type="text"

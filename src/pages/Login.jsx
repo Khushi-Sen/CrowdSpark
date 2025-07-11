@@ -34,7 +34,6 @@ export default function Login() {
           navigate("/dashboard");
         }
 
-        alert('Login successful');
       } else {
         alert('Login failed: Invalid server response');
       }
