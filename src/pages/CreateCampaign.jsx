@@ -31,7 +31,7 @@ const handleCreate = async (e) => {
   };
 
   try {
-    const res = await axios.post('http://localhost:5000/api/campaigns', campaign);
+    const res = await axios.post('https://crowd-spark-backend.onrender.com/api/campaigns', campaign);
     alert(res.data.message || "Campaign created successfully");
     console.log("Saved campaign:", res.data.campaign);
     navigate('/dashboard');

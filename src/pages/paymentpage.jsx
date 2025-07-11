@@ -39,7 +39,7 @@ function PaymentPage() {
     }
 
     try {
-      const orderData = await axios.post("http://localhost:5000/api/payment/create-order", {
+      const orderData = await axios.post("https://crowd-spark-backend.onrender.com/api/payment/create-order", {
         amount: parseInt(amount)
       });
 
@@ -58,7 +58,7 @@ function PaymentPage() {
 
           if (campaignId) {
             try {
-              await axios.put(`http://localhost:5000/api/campaigns/${campaignId}/fund`, {
+              await axios.put(`https://crowd-spark-backend.onrender.com/api/campaigns/${campaignId}/fund`, {
                 amount: parseInt(amount)
               });
             } catch (err) {

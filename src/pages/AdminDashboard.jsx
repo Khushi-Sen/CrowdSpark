@@ -23,7 +23,7 @@ const AdminDashboard = () => {
   const fetchCampaigns = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/admin/campaigns", {
+      const res = await axios.get("https://crowd-spark-backend.onrender.com/api/admin/campaigns", {
         params: {
           search: searchTerm,
           status: filterStatus,
@@ -44,7 +44,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/admin/stats");
+        const res = await axios.get("https://crowd-spark-backend.onrender.com/api/admin/stats");
         setStats(res.data);
       } catch (err) {
         console.error("Failed to fetch stats", err);

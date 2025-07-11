@@ -7,7 +7,7 @@ export default function CommentsSection({ campaignId }) {
   const [user, setUser] = useState('Anonymous'); 
   const fetchComments = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/comments/${campaignId}`);
+      const res = await axios.get(`https://crowd-spark-backend.onrender.com/api/comments/${campaignId}`);
       setComments(res.data);
     } catch (err) {
       console.error("Failed to fetch comments", err);
@@ -18,7 +18,7 @@ const handleCommentSubmit = async (e) => {
   if (!commentText.trim()) return;
 
   try {
-    const res = await axios.post(`http://localhost:5000/api/comments/${id}`, {
+    const res = await axios.post(`https://crowd-spark-backend.onrender.com/api/comments/${id}`, {
       text: commentText,
       author: 'Guest', 
     });

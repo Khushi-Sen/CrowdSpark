@@ -10,7 +10,7 @@ export default function Explore() {
   const [sort, setSort] = useState("Latest");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/campaigns")
+    axios.get("https://crowd-spark-backend.onrender.com/api/campaigns")
       .then(res => setCampaigns(res.data))
       .catch(err => console.error("Error loading campaigns:", err));
   }, []);
@@ -20,7 +20,7 @@ export default function Explore() {
     if (!confirm) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/campaigns/${id}`);
+      await axios.delete(`https://crowd-spark-backend.onrender.com/api/campaigns/${id}`);
       setCampaigns(prev => prev.filter(c => c._id !== id));
     } catch (err) {
       console.error("Failed to delete campaign:", err.response?.data || err.message);

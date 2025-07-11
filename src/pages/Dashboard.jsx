@@ -16,7 +16,7 @@ export default function Dashboard() {
 
   const fetchUserCampaigns = async (userId) => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/campaigns/user/${userId}`);
+      const res = await axios.get(`https://crowd-spark-backend.onrender.com/api/campaigns/user/${userId}`);
       setCampaigns(res.data);
     } catch (err) {
       console.error("Failed to fetch user's campaigns", err);
@@ -28,7 +28,7 @@ const handleDelete = async (campaignId) => {
     const confirmed = window.confirm("Are you sure you want to delete this campaign?");
     if (!confirmed) return;
 
-    const res = await axios.delete(`http://localhost:5000/api/campaigns/${campaignId}`);
+    const res = await axios.delete(`https://crowd-spark-backend.onrender.com/api/campaigns/${campaignId}`);
     if (res.status === 200) {
       setCampaigns((prev) => prev.filter((c) => c._id !== campaignId));
       // alert("✅ Campaign deleted successfully");

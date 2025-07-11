@@ -4,6 +4,7 @@ const express  = require('express');
 const mongoose = require('mongoose');
 const cors     = require('cors');
 
+
 const authRoutes     = require('./routes/auth');
 const campaignRoutes = require('./routes/campaigns');
 const commentRoutes  = require('./routes/comments');
@@ -13,10 +14,13 @@ const adminRoutes = require('./routes/admin');
 const paymentRoutes = require('./routes/payment');
 
 const app = express();
-
+const allowedOrigins =
+  process.env.NODE_ENV === 'production'
+    ? ['https://crowd-spark-zeta.vercel.app']     
+    : ['http://localhost:5173'];
 
 app.use(cors({
-  origin: 'http://localhost:5173', 
+  origin: allowedOrigins, 
   credentials: true
 }));
 

@@ -14,7 +14,7 @@ export default function CampaignDetail() {
   useEffect(() => {
     const fetchCampaign = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/campaigns/${id}`);
+        const res = await axios.get(`https://crowd-spark-backend.onrender.com/api/campaigns/${id}`);
         setCampaign(res.data);
       } catch (err) {
         console.error('Failed to fetch campaign', err);
@@ -23,7 +23,7 @@ export default function CampaignDetail() {
 
     const fetchComments = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/comments/${id}`);
+        const res = await axios.get(`https://crowd-spark-backend.onrender.com/api/comments/${id}`);
         setComments(res.data);
       } catch (err) {
         console.error('Failed to fetch comments', err);
@@ -32,7 +32,7 @@ export default function CampaignDetail() {
 
     const fetchUpdates = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/updates/${id}`);
+        const res = await axios.get(`https://crowd-spark-backend.onrender.com/api/updates/${id}`);
         setUpdates(res.data);
       } catch (err) {
         console.error('Failed to fetch updates', err);
@@ -49,7 +49,7 @@ export default function CampaignDetail() {
     if (!commentText.trim()) return;
 
     try {
-      const res = await axios.post(`http://localhost:5000/api/comments/${id}`, {
+      const res = await axios.post(`https://crowd-spark-backend.onrender.com/api/comments/${id}`, {
         text: commentText,
         author: 'Guest', 
       });
@@ -66,7 +66,7 @@ export default function CampaignDetail() {
     if (!updateMessage.trim()) return;
 
     try {
-      const res = await axios.post(`http://localhost:5000/api/updates/${id}`, {
+      const res = await axios.post(`https://crowd-spark-backend.onrender.com/api/updates/${id}`, {
         title: updateTitle,
         message: updateMessage,
       });
